@@ -1,0 +1,182 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: var(--paper);
+  --color-paper-warm: var(--paper-warm);
+  --color-ink: var(--ink);
+  --color-ink-deep: var(--ink-deep);
+  --color-status: var(--status);
+  --color-status-foreground: var(--status-foreground);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+:root {
+  --font-display: 'Urbanist', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans: 'Epilogue', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --radius: 0px;
+  --paper: #ffffff;
+  --paper-warm: #f6f7f8;
+  --ink: #252729;
+  --ink-deep: #090909;
+  --status: #008a22;
+  --status-foreground: var(--paper);
+  --background: var(--paper);
+  --foreground: var(--ink-deep);
+  --card: var(--paper);
+  --card-foreground: var(--ink-deep);
+  --popover: var(--paper);
+  --popover-foreground: var(--ink-deep);
+  --primary: var(--ink-deep);
+  --primary-foreground: var(--paper);
+  --secondary: var(--paper-warm);
+  --secondary-foreground: var(--ink-deep);
+  --muted: var(--paper-warm);
+  --muted-foreground: #52565a;
+  --accent: var(--paper-warm);
+  --accent-foreground: var(--ink-deep);
+  --destructive: #e40014;
+  --destructive-foreground: var(--paper);
+  --border: #d5d8da;
+  --input: #d5d8da;
+  --ring: var(--ink);
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--background);
+  color: var(--foreground);
+  overflow-x: hidden;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-serif-display {
+  font-family: var(--font-serif);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.grain::after {
+  content: "";
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  position: absolute;
+  inset: 0;
+}
+
+.ambient-spot {
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    600px circle at var(--mx, 50%) var(--my, 30%),
+    color-mix(in oklab, var(--foreground) 3%, transparent),
+    transparent 60%
+  );
+  position: fixed;
+  inset: 0;
+  transition: background 0.4s;
+}
+
+.blueprint-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--foreground) 5%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--foreground) 5%, transparent) 1px, transparent 1px);
+  background-size: 80px 80px;
+  -webkit-mask-image: radial-gradient(#000 30%, #0000 75%);
+  mask-image: radial-gradient(#000 30%, #0000 75%);
+}
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(6deg);
+  }
+}
+
+.float-slow {
+  animation: 9s ease-in-out infinite float-slow;
+}
+
+.nova-bar {
+  background: color-mix(in oklab, var(--paper) 55%, transparent);
+  border-radius: 9999px;
+  padding: 8px 10px;
+  position: relative;
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  backdrop-filter: blur(18px) saturate(180%);
+  border: 1px solid color-mix(in oklab, var(--foreground) 12%, transparent);
+  box-shadow:
+    0 1px #ffffff99 inset,
+    0 -1px color-mix(in oklab, var(--foreground) 8%, transparent) inset,
+    0 14px 40px -18px color-mix(in oklab, var(--foreground) 35%, transparent),
+    0 2px 8px -2px color-mix(in oklab, var(--foreground) 10%, transparent);
+  overflow: hidden;
+}
+
+.nova-bar::before {
+  content: "";
+  border-radius: inherit;
+  background:
+    radial-gradient(120% 80% at 0% 0%, rgba(255, 255, 255, 0.5), transparent 60%),
+    radial-gradient(80% 60% at 100% 100%, color-mix(in oklab, var(--foreground) 8%, transparent), transparent 60%);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.nova-link {
+  color: color-mix(in oklab, var(--foreground) 75%, transparent);
+}
+
+.nova-link:hover {
+  color: var(--foreground);
+  background: color-mix(in oklab, var(--foreground) 6%, transparent);
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.translate-z-10 {
+  transform: translateZ(18px);
+}
+
+.translate-z-20 {
+  transform: translateZ(32px);
+}
+
